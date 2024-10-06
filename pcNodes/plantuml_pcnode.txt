@@ -1,0 +1,77 @@
+@startuml
+
+skin rose
+
+title Classes - Class Diagram
+
+class GpuSpec {
+    -string manufacturer;
+    -string model;
+    -string PCIType
+    -string VRAMDDRType
+    -unsigned int cores;
+    -float clockSpeed;
+    -float memorySize;
+    -float memoryBandwidth;
+    -unsigned int TDP
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+class CpuSpec {
+    -string manufacturer;
+    -string model;
+    -string socket;
+    -unsigned int threads;
+    -unsigned int cores;
+    -float clockSpeed;
+    -bool integratedGraphics;
+    -unsigned int TDP
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+class RamSpec {
+    -string manufacturer;
+    -string DDRType
+    -unsigned int size;
+    -unsigned int frequency;
+    -string CLType
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+class LanSpec {
+    -unsigned int bandwith
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+class ClusterNode {
+    -GpuSpec gpu
+    -CpuSpec cpu
+    -RamSpec ram
+    -LanSpec lan
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+class Cluster {
+    -List<ClusterNode> nodes
+    +void Print()
+    +void Import(string filename)
+    +void Export(string filename)
+}
+
+ClusterNode "1" -- "*" GpuSpec
+ClusterNode "1" -- "*" CpuSpec
+ClusterNode "1" -- "*" RamSpec
+ClusterNode "1" -- "*" LanSpec
+Cluster "1" -- "*" ClusterNode
+
+@enduml
